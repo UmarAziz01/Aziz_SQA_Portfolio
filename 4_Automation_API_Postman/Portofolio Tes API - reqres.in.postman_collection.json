@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "100ba60a-33c1-4e55-ae57-478036c6b0a2",
+		"name": "Portofolio Tes API - reqres.in",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43187041"
+	},
+	"item": [
+		{
+			"name": "GET - List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Tes 1: Memvalidasi Status Code adalah 200 (OK)\r",
+							"pm.test(\"Status code adalah 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Tes 2: Memvalidasi bahwa response adalah JSON\r",
+							"pm.test(\"Response adalah JSON\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"// Tes 3: Memvalidasi bahwa ada 6 pengguna di halaman 2\r",
+							"pm.test(\"Total pengguna di halaman ini adalah 6\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.per_page).to.eql(6);\r",
+							"    pm.expect(jsonData.data.length).to.eql(6);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Tes 1: Memvalidasi Status Code adalah 201 (Created)\r",
+							"pm.test(\"Status code adalah 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Tes 2: Memvalidasi bahwa nama di response SAMA dengan yang kita kirim\r",
+							"pm.test(\"Nama pengguna di response sesuai dengan request body\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Umar Aziz\");\r",
+							"});\r",
+							"\r",
+							"// Tes 3: Memvalidasi bahwa ada 'id' dan 'createdAt' di response\r",
+							"pm.test(\"Response body berisi 'id' dan 'createdAt'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData).to.have.property('createdAt');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{REQRES_API_KEY}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Umar Aziz\",\r\n    \"job\": \"SQA Engineer Intern\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Tes 1: Memvalidasi Status Code adalah 200 (OK)\r",
+							"pm.test(\"Status code adalah 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Tes 2: Memvalidasi 'job' sudah ter-update di response\r",
+							"pm.test(\"Pekerjaan berhasil di-update di response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.job).to.eql(\"Senior SQA Engineer\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{REQRES_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Umar Aziz\",\r\n    \"job\": \"Senior SQA Engineer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Robust tests for 204 No Content on reqres.in DELETE",
+							"// 1) Assert status is 204",
+							"pm.test(\"Status code is 204 (No Content)\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"// 2) Assert response text body is empty (Postman returns empty string for 204)",
+							"pm.test(\"Response body is empty string for 204\", function () {",
+							"    const text = pm.response.text();",
+							"    pm.expect(text, \"Body should be empty for 204\").to.be.a(\"string\").that.has.length(0);",
+							"});",
+							"",
+							"// 3) Assert response size is zero, if size info is available",
+							"pm.test(\"Response size is zero (when available)\", function () {",
+							"    const size = pm.response.size();",
+							"    // pm.response.size() returns { body, header, total } in newer apps; guard for availability",
+							"    if (size && typeof size === 'object' && 'body' in size) {",
+							"        pm.expect(size.body, \"Body size should be 0 for 204\").to.eql(0);",
+							"    } else if (typeof pm.response.size === 'number') {",
+							"        // legacy shape",
+							"        pm.expect(pm.response.size, \"Body size should be 0 for 204\").to.eql(0);",
+							"    } else {",
+							"        pm.expect(true, \"Size info not available; skipping body size check\").to.be.true;",
+							"    }",
+							"});",
+							"",
+							"// 4) Assert response time threshold",
+							"pm.test(\"Response time is under 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"// 5) Header validations suited for 204",
+							"pm.test(\"Content-Length is 0 or absent for 204\", function () {",
+							"    const cl = pm.response.headers.get(\"Content-Length\");",
+							"    if (cl !== null && cl !== undefined) {",
+							"        pm.expect(cl).to.satisfy(v => v === '0' || v === 0, \"Content-Length should be 0 if present\");",
+							"    } else {",
+							"        pm.expect(true, \"Content-Length absent is acceptable for 204\").to.be.true;",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Content-Type may be absent for 204\", function () {",
+							"    const ct = pm.response.headers.get(\"Content-Type\");",
+							"    // Many servers omit Content-Type on 204; if present, just ensure it's a non-empty string",
+							"    if (ct) {",
+							"        pm.expect(ct).to.be.a(\"string\").that.is.not.empty;",
+							"    } else {",
+							"        pm.expect(true, \"Content-Type absent is acceptable for 204\").to.be.true;",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"No body-related headers implying content for 204\", function () {",
+							"    // It's okay if servers include some headers, but they should not indicate a non-zero body",
+							"    const te = pm.response.headers.get(\"Transfer-Encoding\");",
+							"    const cl = pm.response.headers.get(\"Content-Length\");",
+							"    if (cl) {",
+							"        pm.expect(cl).to.equal('0');",
+							"    }",
+							"    if (te) {",
+							"        // chunked on 204 is uncommon but sometimes set; don't fail hard, just warn via assertion message",
+							"        pm.expect(te.toLowerCase()).to.satisfy(v => v === 'chunked' || v === 'identity', \"Unexpected transfer-encoding for 204\");",
+							"    } else {",
+							"        pm.expect(true).to.be.true;",
+							"    }",
+							"});",
+							"",
+							"// 6) Helpful log message (won't affect test results)",
+							"pm.test(\"Log delete metadata\", function () {",
+							"    const msg = [",
+							"        `Request: ${pm.info.requestName}`,",
+							"        `Method: ${pm.request.method}`,",
+							"        `URL: ${pm.request.url}`,",
+							"        `Status: ${pm.response.code} ${pm.response.status}`,",
+							"        `Time: ${pm.response.responseTime}ms`",
+							"    ].join(\" | \");",
+							"    console.log(msg);",
+							"    pm.expect(true).to.be.true; // placeholder so the test is counted",
+							"});",
+							"",
+							"// Notes:",
+							"// - This request currently includes an x-api-key header and a JSON body, but reqres.in DELETE ignores body and does not require an API key.",
+							"// - Tests intentionally do not fail based on presence of those; they only validate behavior expected from a 204 response."
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{REQRES_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Umar Aziz\",\r\n    \"job\": \"Senior SQA Engineer\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

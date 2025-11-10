@@ -1,0 +1,8 @@
+# Mengabaikan dependensi Cypress / Node.js
+node_modules/
+
+# Mengabaikan cache Python
+__pycache__/
+
+# Mengabaikan file sistem operasi
+.DS_Store
