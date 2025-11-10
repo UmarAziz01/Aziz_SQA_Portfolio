@@ -1,7 +1,7 @@
 # Portofolio Software Quality Assurance (SQA) - Umar Abdul Aziz
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Umar%20Abdul%20Aziz-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/umar-abdul-aziz-b95435273)
-[![GitHub](https://img.shields.io/badge/GitHub-Portofolio-181717?style=flat&logo=github)](https://github.com/[NAMA_PENGGUNA_ANDA]/[NAMA_REPOSITORI_INI])
+[![GitHub](https://img.shields.io/badge/GitHub-Portofolio-181717?style=flat&logo=github)](https://github.com/UmarAziz01/Aziz_SQA_Portfolio/tree/main)
 
 ## 🌟 Tentang Saya
 
@@ -79,7 +79,7 @@ Menunjukkan kemampuan saya dalam menguji logika *backend* (server) melalui API, 
     * **PUT** (Update User): Memvalidasi status `200` dan data berhasil diperbarui.
     * **DELETE** (Delete User): Memvalidasi status `204` (No Content).
 * **Cara Menggunakan:**
-    1.  Unduh file **[Portofolio_Postman.json](/4_Automation_API_Postman/Portofolio_Tes_API-reqres.in.postman_collection.json)** dari folder proyek.
+    1.  Unduh file **[Portofolio_Postman.json](https://github.com/UmarAziz01/Aziz_SQA_Portfolio/blob/main/4_Automation_API_Postman/Portofolio%20Tes%20API%20-%20reqres.in.postman_collection.json)** dari folder proyek.
     2.  Buka Postman, klik **"Import"**.
     3.  Pilih file `.json` tersebut. *Collection* akan muncul di panel kiri Anda.
     4.  Jalankan setiap *request* dan periksa tab **"Test Results"** untuk melihat hasil validasi otomatis.
